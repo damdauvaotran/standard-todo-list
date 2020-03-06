@@ -1,0 +1,53 @@
+image: 'node:12.13.1-buster'
+
+before_script:
+  # - npm install
+
+# cache:
+#   paths:
+#     - node_modules/
+
+# test:
+#   stage: test
+#   before_script:
+#     - npm install
+#   script:
+#     - node --version
+
+# ssh:
+#   stage: deploy
+#   script:
+#     - ssh root@$SERVER_IP
+
+install_env:
+  stage: deploy
+  before_script:
+    - apt-get update
+    - 'which ssh-agent || apt-get install openssh-client -y'
+    - 'which git || apt-get install -y git '
+    - 'which rsync || apt-get install -y rsync '
+    - mkdir ~/.ssh
+
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
+  script:
+    # Install pm2
+    # - ssh $SERVER_USER@$SERVER_IP "npm install -g pm2"
+    # # Stop app
+    # - ssh $SERVER_USER@$SERVER_IP "pm2 stop $APP_NAME"
+    # Make folder
+    - ssh $SERVER_USER@$SERVER_IP "[ ! -e /root/checker-be ] || rm -r
+      /root/checker-be; mkdir -p /root/checker-be"
+    # Copy file
+    - rsync -zr ./* $SERVER_USER@$SERVER_IP:/root/checker-be
+    # # Start app
+    # - ssh $SERVER_USER@$SERVER_IP "cd /root/checker-be && npm install ; /root/.npm-global/bin/pm2 start --name $APP_NAME -- --port $APP_PORT"
+
+    # Start app
+    # - ssh $SERVER_USER@$SERVER_IP "bash /root/checker-be/deploy.sh"
+
+    - npm i -g pm2
+    - ls
+    - pm2 deploy production setup
+    - pm2 deploy ecosystem.config.js production
