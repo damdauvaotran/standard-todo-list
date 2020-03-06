@@ -30,12 +30,4 @@ router.post(
   },
 );
 
-router.post('todo', [body('content').isString()], (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return buildRes(res, false, errors.array());
-  }
-  return buildRes(res, true);
-});
-
 module.exports = router;
