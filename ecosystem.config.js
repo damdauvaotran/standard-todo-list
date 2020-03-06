@@ -2,7 +2,7 @@ const user = process.env.SERVER_USER || 'root';
 
 module.exports = {
   apps: [{
-    name: 'API',
+    name: 'todo',
     script: './index.js',
     // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
     instances: 1,
