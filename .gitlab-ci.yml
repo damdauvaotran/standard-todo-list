@@ -34,7 +34,7 @@ install_env:
     - ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
   script:
     # Install pm2
-    - ssh $SERVER_USER@$SERVER_IP "npm install -g pm2"
+    - ssh $SERVER_USER@$SERVER_IP 'npm install -g pm2'
     # Make folder
     - ssh $SERVER_USER@$SERVER_IP '[ ! -e /root/$APP_NAME ] || rm -r /root/$APP_NAME; mkdir -p /root/$APP_NAME'
     # Copy file
