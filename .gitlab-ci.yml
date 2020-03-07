@@ -26,8 +26,9 @@ install_env:
     - 'which ssh-agent || apt-get install openssh-client -y'
     - 'which git || apt-get install -y git '
     - 'which rsync || apt-get install -y rsync '
-    - mkdir ~/.ssh
+    - npm i -g pm2
 
+    - mkdir ~/.ssh
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
@@ -44,7 +45,7 @@ install_env:
     # # Start app
     - ssh $SERVER_USER@$SERVER_IP "cd /root/checker-be && npm install ; pm2 start --name $APP_NAME -- --port $APP_PORT"
 
-    # - npm i -g pm2
-    # - ls
-    # - pm2 deploy production setup
-    # - pm2 deploy ecosystem.config.js production
+    - npm i -g pm2
+    - ls
+    - pm2 deploy production setup
+    - pm2 deploy ecosystem.config.js production
