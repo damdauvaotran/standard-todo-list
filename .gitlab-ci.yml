@@ -3,9 +3,9 @@ image: 'node:12.13.1-buster'
 before_script:
   # - npm install
 
-# cache:
-#   paths:
-#     - node_modules/
+cache:
+  paths:
+    - node_modules/
 
 # test:
 #   stage: test
@@ -33,19 +33,14 @@ install_env:
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
   script:
-    # Install pm2
-    # - ssh $SERVER_USER@$SERVER_IP "npm install -g pm2"
+    Install pm2
+    - ssh $SERVER_USER@$SERVER_IP "npm install -g pm2"
     # # Stop app
     # - ssh $SERVER_USER@$SERVER_IP "pm2 stop $APP_NAME"
     # Make folder
-    - ssh $SERVER_USER@$SERVER_IP "[ ! -e /root/checker-be ] || rm -r
-      /root/checker-be; mkdir -p /root/checker-be"
+    - ssh $SERVER_USER@$SERVER_IP "[ ! -e /root/$APP_NAME ] || rm -r /root/$APP_NAME; mkdir -p /root/$APP_NAME"
     # Copy file
-    - rsync -zr ./* $SERVER_USER@$SERVER_IP:/root/checker-be
+    - rsync -zr ./* $SERVER_USER@$SERVER_IP:/root/$APP_NAME
     # # Start app
-    - ssh $SERVER_USER@$SERVER_IP "cd /root/checker-be && npm install ; pm2 start --name $APP_NAME -- --port $APP_PORT"
+    - ssh $SERVER_USER@$SERVER_IP "cd /root/$APP_NAME && npm install ; pm2 start --name $APP_NAME -- --port $APP_PORT"
 
-    - npm i -g pm2
-    - ls
-    - pm2 deploy production setup
-    - pm2 deploy ecosystem.config.js production
