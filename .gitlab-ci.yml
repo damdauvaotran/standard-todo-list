@@ -40,4 +40,4 @@ install_env:
     # Copy file
     - rsync -zr ./* $SERVER_USER@$SERVER_IP:/root/$APP_NAME
     # # Start app
-    - ssh $SERVER_USER@$SERVER_IP "cd /root/$APP_NAME && npm install ;echo $APP_NAME; PORT=$APP_PORT pm2 start index.js --name $APP_NAME"
+    - ssh $SERVER_USER@$SERVER_IP "cd /root/$APP_NAME && npm install ;echo $APP_NAME; export PORT=$APP_PORT; pm2 start index.js --name $APP_NAME"
