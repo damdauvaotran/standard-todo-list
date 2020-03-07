@@ -1,8 +1,9 @@
 const user = process.env.SERVER_USER || 'root';
+const appName = process.env.APP_NAME;
 
 module.exports = {
   apps: [{
-    name: 'todo',
+    name: appName,
     script: './index.js',
     // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
     instances: 1,
@@ -23,7 +24,7 @@ module.exports = {
       host: '172.104.182.140',
       ref: 'origin/develop',
       repo: 'git@gitlab.com:damdauvaotran/todo.git',
-      path: '/root/todo',
+      path: `/root/${appName}`,
       ssh_options: 'StrictHostKeyChecking=no',
       'post-deploy': 'npm install &&  /root/.npm-global/bin/pm2 reload ecosystem.config.js --env production',
     },
