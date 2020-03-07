@@ -36,8 +36,8 @@ install_env:
     # Install pm2
     - ssh $SERVER_USER@$SERVER_IP "npm install -g pm2"
     # Make folder
-    - ssh $SERVER_USER@$SERVER_IP "[ ! -e /root/$APP_NAME ] || rm -r /root/$APP_NAME; mkdir -p /root/$APP_NAME"
+    - ssh $SERVER_USER@$SERVER_IP '[ ! -e /root/$APP_NAME ] || rm -r /root/$APP_NAME; mkdir -p /root/$APP_NAME'
     # Copy file
     - rsync -zr ./* $SERVER_USER@$SERVER_IP:/root/$APP_NAME
     # # Start app
-    - ssh $SERVER_USER@$SERVER_IP "cd /root/$APP_NAME && npm install ; pm2 start --name $APP_NAME -- --port $APP_PORT"
+    - ssh $SERVER_USER@$SERVER_IP 'cd /root/$APP_NAME && npm install ; pm2 start --name $APP_NAME -- --port $APP_PORT'
