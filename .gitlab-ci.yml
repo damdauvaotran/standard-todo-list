@@ -42,12 +42,9 @@ install_env:
     # Copy file
     - rsync -zr ./* $SERVER_USER@$SERVER_IP:/root/checker-be
     # # Start app
-    # - ssh $SERVER_USER@$SERVER_IP "cd /root/checker-be && npm install ; /root/.npm-global/bin/pm2 start --name $APP_NAME -- --port $APP_PORT"
+    - ssh $SERVER_USER@$SERVER_IP "cd /root/checker-be && npm install ; pm2 start --name $APP_NAME -- --port $APP_PORT"
 
-    # Start app
-    # - ssh $SERVER_USER@$SERVER_IP "bash /root/checker-be/deploy.sh"
-
-    - npm i -g pm2
-    - ls
-    - pm2 deploy production setup
-    - pm2 deploy ecosystem.config.js production
+    # - npm i -g pm2
+    # - ls
+    # - pm2 deploy production setup
+    # - pm2 deploy ecosystem.config.js production
