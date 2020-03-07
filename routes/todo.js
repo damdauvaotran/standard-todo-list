@@ -7,12 +7,12 @@ const router = express.Router();
 
 const todoList = [];
 
-router.get('todo', (req, res) => {
+router.get('/', (req, res) => {
   buildRes(res, true, { todoList });
 });
 
 router.post(
-  'todo',
+  '/',
   [body('content').isString(), body('isDone').isBoolean()],
   (req, res) => {
     const errors = validationResult(req);

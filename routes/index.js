@@ -1,9 +1,9 @@
 const express = require('express');
 
 const router = express.Router();
-const todoRouter = require('./todo')
+const todoRouter = require('./todo');
 
-router.use('/', todoRouter);
+router.use('/todo', todoRouter);
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
