@@ -39,5 +39,7 @@ install_env:
     - ssh $SERVER_USER@$SERVER_IP "[ ! -e /root/$APP_NAME ] || rm -r /root/$APP_NAME; mkdir -p /root/$APP_NAME"
     # Copy file
     - rsync -zr ./* $SERVER_USER@$SERVER_IP:/root/$APP_NAME
+    # Delete app
+    - ssh $SERVER_USER@$SERVER_IP "pm2 delete $APP_NAME"
     # # Start app
     - ssh $SERVER_USER@$SERVER_IP "cd /root/$APP_NAME && npm install ;echo $APP_NAME; pm2 start index.js --name $APP_NAME"
