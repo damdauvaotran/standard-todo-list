@@ -7,7 +7,7 @@
   },
   "servers": [
     "http://localhost:8000",
-    "http://todo.mottrieuangi.codes"
+    "http://todo.mottrieuangi.cods"
   ],
   "paths": {
     "/todo": {
