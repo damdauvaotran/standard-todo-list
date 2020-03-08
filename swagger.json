@@ -5,9 +5,10 @@
     "description": "API of simple todo list without auth",
     "version": "1.0.0"
   },
-  "host": "localhost:8000",
-  "basePath": "/",
-  "schemes": ["http", "https"],
+  "server": [
+    "http://localhost:8000",
+    "http://todo.mottrieuangi.codes"
+  ],
   "paths": {
     "/todo": {
       "get": {
