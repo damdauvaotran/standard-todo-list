@@ -26,8 +26,8 @@ install_env:
     - 'which ssh-agent || apt-get install openssh-client -y'
     - 'which git || apt-get install -y git '
     - 'which rsync || apt-get install -y rsync '
-    - npm i -g pm2
 
+    # ssh
     - mkdir ~/.ssh
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
@@ -42,4 +42,4 @@ install_env:
     # Delete app
     # - ssh $SERVER_USER@$SERVER_IP "pm2 delete $APP_NAME"
     # Start app
-    - ssh $SERVER_USER@$SERVER_IP "cd /root/$APP_NAME && npm install ;PORT=$APP_PORT pm2 start index.js --name $APP_NAME"
+    - ssh $SERVER_USER@$SERVER_IP "cd /root/$APP_NAME && npm install ;PORT=$APP_PORT pm2 restart index.js --name $APP_NAME"
