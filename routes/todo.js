@@ -17,8 +17,8 @@ router.post(
   (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return buildRes(res, false, errors.array());
-    }
+      return buildRes(res, false, 'Invalid Input');
+    } console.log(errors);
     const id = v4();
     const { content, isDone } = req.body;
     todoList.push({
@@ -26,6 +26,7 @@ router.post(
       content,
       isDone,
     });
+    console.log(todoList);
     return buildRes(res, true, { todoList });
   },
 );
