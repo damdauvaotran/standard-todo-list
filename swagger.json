@@ -21,13 +21,48 @@
         "summary": "Create a new todo item",
         "description": "Optional extended description in Markdown.",
         "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "status",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["content", "isDone"],
+              "properties": {
+                "content": {
+                  "type": "string"
+                },
+                "isDone": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "user to add to the system",
+          "content": {
+            "application/json": {
+              "schema": {},
+              "examples": {
+                "user": {
+                  "summary": "User Example"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "A list of todo",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array"
+                  "type": "array",
+                  "items": {
+                    "Hello": "string"
+                  }
                 }
               }
             }
