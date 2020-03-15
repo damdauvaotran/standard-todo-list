@@ -6,11 +6,67 @@ const { buildRes } = require('../utils/response');
 const router = express.Router();
 
 const todoList = [];
-
+/**
+ * @swagger
+ * /todo:
+ *  get:
+ *    summary: Get todo list
+ *    description: Return a list of todo
+ *    produces:
+ *      - application/json
+ *    responses:
+ *      '200':
+ *        description: OK
+ *        schema:
+ *          type: object
+ *          properties:
+ *            todoList:
+ *              type: array
+ *              items:
+ *                type: object
+ *                properties:
+ *                  id:
+ *                    type: string
+ *                  content:
+ *                    type: string
+ *                  isDone:
+ *                    type: boolean
+ *
+ *
+ *
+ *
+ */
 router.get('/', (req, res) => {
   buildRes(res, true, { todoList });
 });
 
+/**
+ * @swagger
+ * /todo:
+ *  post:
+ *    description: Create new todo item
+ *    summary: Create a new todo item
+ *    produces:
+ *      - application/json
+ *    responses:
+ *      200:
+ *        description: OK
+ *        schema:
+ *          type: object
+ *          properties:
+ *            todoList:
+ *              type: array
+ *              items:
+ *                type: object
+ *                properties:
+ *                  id:
+ *                    type: string
+ *                  content:
+ *                    type: string
+ *                  isDone:
+ *                    type: boolean
+ *
+ */
 router.post(
   '/',
   [body('content').isString(), body('isDone').isBoolean()],

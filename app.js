@@ -1,14 +1,14 @@
 const createError = require('http-errors');
 const express = require('express');
 const swaggerUi = require('swagger-ui-express');
-
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-const swaggerDocument = require('./swagger.json');
 
+const swaggerDocument = require('./swagger.json');
 const indexRouter = require('./routes/index');
+const swaggerSpec = require('./swagger');
 
 const app = express();
 
@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Docs
-app.use('/api/v1', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api/v1', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/', indexRouter);
 

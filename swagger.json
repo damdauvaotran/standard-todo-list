@@ -13,7 +13,41 @@
         "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "todoList": {
+                  "type": "array",
+                  "description": "todoList",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "content": {
+                        "type": "string"
+                      },
+                      "isDone": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "id": "5c100c2e-6afb-4b30-8393-0d383a39cb14",
+                      "content": "Hello world",
+                      "isDone": true
+                    },{
+                      "id": "5c100c2e-6afb-4b30-8393-0d383a3gcb14",
+                      "content": "Goodbye world",
+                      "isDone": true
+                    }
+                  ]
+                }
+              }
+            }
           }
         }
       },
