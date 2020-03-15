@@ -8,6 +8,7 @@ const router = express.Router();
 const todoList = [];
 /**
  * @swagger
+ *
  * /todo:
  *  get:
  *    summary: Get todo list
@@ -23,18 +24,7 @@ const todoList = [];
  *            todoList:
  *              type: array
  *              items:
- *                type: object
- *                properties:
- *                  id:
- *                    type: string
- *                  content:
- *                    type: string
- *                  isDone:
- *                    type: boolean
- *
- *
- *
- *
+ *                $ref: '#definitions/TodoItem'
  */
 router.get('/', (req, res) => {
   buildRes(res, true, { todoList });
@@ -42,6 +32,7 @@ router.get('/', (req, res) => {
 
 /**
  * @swagger
+ *
  * /todo:
  *  post:
  *    description: Create new todo item
@@ -57,15 +48,7 @@ router.get('/', (req, res) => {
  *            todoList:
  *              type: array
  *              items:
- *                type: object
- *                properties:
- *                  id:
- *                    type: string
- *                  content:
- *                    type: string
- *                  isDone:
- *                    type: boolean
- *
+ *                $ref: '#definitions/TodoItem'
  */
 router.post(
   '/',
